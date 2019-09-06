@@ -1,6 +1,6 @@
 {
  	"name" : "salonote Monkey",
- 	"version" : "1.0",
+ 	"version" : "1.0.1",
  	"download_url" : "https://github.com/salonote/salonote-monkey/archive/master.zip",
  	"sections" : {
  		"description" : "snow-monkeyテーマを拡張"
