@@ -3,7 +3,7 @@
 Plugin Name:salonote Monkey
 Plugin URI:https://salonote.com
 Description:Salonoteモンキー
-Version: 1.0.0
+Version: 1.0.1
 Author:Healing Solutions
 Author URI: https://www.healing-solutions.jp/
 License: GPL2
@@ -31,24 +31,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 //プラグインのパスを設定
 define('SALONOTE_HELPER__PLUGIN_PATH' , dirname(__FILE__)  );
+define('salonte_PLUGIN_URL'  , plugins_url() );
+
 
 class SALONOTE_HELPER__Class {
 
 	function __construct() {
 
-  //function 
-  require( SALONOTE_HELPER__PLUGIN_PATH . '/inc/functions.php');
+    //function 
+    require( SALONOTE_HELPER__PLUGIN_PATH . '/inc/functions.php');
+
+    require( SALONOTE_HELPER__PLUGIN_PATH . '/admin/customizer/theme-customizer.php');
+    require( SALONOTE_HELPER__PLUGIN_PATH . '/admin/inc/color.php');
+
+    //dashboard widget
+    require_once( SALONOTE_HELPER__PLUGIN_PATH. '/lib/module/dashboard_ajax.php' ); 
+
+    //plugins
+    require_once( SALONOTE_HELPER__PLUGIN_PATH. '/plugins/search-engine-essence/search-engine-essence.php' );
+    //require_once( get_template_directory(). '/lib/salonote-helper/plugins/categories-images/categories-images.php' );
+    require_once( SALONOTE_HELPER__PLUGIN_PATH. '/plugins/words-check-essence/words-check-essence.php' );
     
-  require( SALONOTE_HELPER__PLUGIN_PATH . '/admin/customizer/theme-customizer.php');
-  require( SALONOTE_HELPER__PLUGIN_PATH . '/admin/inc/color.php');
-
-  //dashboard widget
-  require_once( SALONOTE_HELPER__PLUGIN_PATH. '/lib/module/dashboard_ajax.php' ); 
-
-  //plugins
-  require_once( SALONOTE_HELPER__PLUGIN_PATH. '/plugins/search-engine-essence/search-engine-essence.php' );
-  //require_once( get_template_directory(). '/lib/salonote-helper/plugins/categories-images/categories-images.php' );
-  require_once( SALONOTE_HELPER__PLUGIN_PATH. '/plugins/words-check-essence/words-check-essence.php' );
+    require SALONOTE_HELPER__PLUGIN_PATH. '/plugins/plugin-update-checker/plugin-update-checker.php'; // 「Plugin Update Checker」をインクルード
+    $myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+      salonte_PLUGIN_URL . '/details.json', // 作成したJSONファイルの 
+      __FILE__, // プラグインのメインファイル、もしくはテーマ内のファイル「functions.php」のフルパス
+      'salonote-monkey' // プラグインもしくはテーマのスラッグ
+    );
 
 	}
   
